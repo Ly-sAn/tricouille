@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tricount index{% endblock %}
+
+{% block body %}
+    <h1>Tricount index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Currency</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tricount in tricounts %}
+            <tr>
+                <td>{{ tricount.id }}</td>
+                <td>{{ tricount.Title }}</td>
+                <td>{{ tricount.Currency }}</td>
+                <td>{{ tricount.Description }}</td>
+                <td>
+                    <a href="{{ path('tricount_show', {'id': tricount.id}) }}">show</a>
+                    <a href="{{ path('tricount_edit', {'id': tricount.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('tricount_new') }}">Create new</a>
+{% endblock %}
