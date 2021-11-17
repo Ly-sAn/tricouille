@@ -4,16 +4,27 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\TricountRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+
 #[Route('/user')]
 class UserController extends AbstractController
 {
+    private TricountRepository $tricountRepository;
+
+    public function __construct(TricountRepository $tricountRepository)
+    {
+        $this->tricountRepository = $tricountRepository;
+    }
+
     #[Route('/', name: 'user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
@@ -22,10 +33,11 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/new/{param}', name: 'user_new', methods: ['GET', 'POST'])]
+    public function new(int $param, Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
+        $user->setTricount($this->tricountRepository->find($param));
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -33,7 +45,7 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('user_new', ['param' => $param], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('user/new.html.twig', [

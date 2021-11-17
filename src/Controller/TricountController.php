@@ -33,7 +33,7 @@ class TricountController extends AbstractController
             $entityManager->persist($tricount);
             $entityManager->flush();
 
-            return $this->redirectToRoute('tricount_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('user_new', ['param' => $tricount->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('tricount/new.html.twig', [
