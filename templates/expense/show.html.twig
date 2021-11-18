@@ -28,7 +28,7 @@
 
     <a href="{{ path('expense_index', { 'param': param }) }}">back to list</a>
 
-    <a href="{{ path('expense_edit', {'id': expense.id}) }}">edit</a>
+    <a href="{{ path('expense_edit', {'id': expense.id, 'param': param}) }}">edit</a>
 
     {{ include('expense/_delete_form.html.twig') }}
 {% endblock %}
