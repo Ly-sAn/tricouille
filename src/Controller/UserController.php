@@ -34,8 +34,9 @@ class UserController extends AbstractController
     }
 
     #[Route('/new/{param}', name: 'user_new', methods: ['GET', 'POST'])]
-    public function new(int $param, Request $request, EntityManagerInterface $entityManager): Response
+    public function new(int $param, Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository): Response
     {
+        $users = $userRepository->findBy(array('Tricount' => $this->tricountRepository->find($param)));
         $user = new User();
         $user->setTricount($this->tricountRepository->find($param));
         $form = $this->createForm(UserType::class, $user);
@@ -51,7 +52,7 @@ class UserController extends AbstractController
         return $this->renderForm('user/new.html.twig', [
             'user' => $user,
             'form' => $form,
-            'param' => $param,
+            'users' => $users,
         ]);
     }
 
