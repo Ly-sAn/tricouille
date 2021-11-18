@@ -24,7 +24,7 @@
                 <td>{{ expense.Amount }}</td>
                 <td>
                     <a href="{{ path('expense_show', {'id': expense.id,'param': param} ) }}">show</a>
-                    <a href="{{ path('expense_edit', {'id': expense.id}) }}">edit</a>
+                    <a href="{{ path('expense_edit', {'id': expense.id,'param': param}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

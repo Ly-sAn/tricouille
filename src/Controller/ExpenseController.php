@@ -65,8 +65,8 @@ class ExpenseController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'expense_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Expense $expense, EntityManagerInterface $entityManager): Response
+    #[Route('/edit/{id}/{param}', name: 'expense_edit', methods: ['GET', 'POST'])]
+    public function edit(int $param, Request $request, Expense $expense, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ExpenseType::class, $expense);
         $form->handleRequest($request);
@@ -80,6 +80,7 @@ class ExpenseController extends AbstractController
         return $this->renderForm('expense/edit.html.twig', [
             'expense' => $expense,
             'form' => $form,
+            'param' => $param,
         ]);
     }
 
