@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Expense;
 use App\Form\ExpenseType;
 use App\Repository\ExpenseRepository;
+use App\Repository\TricountRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,16 +16,25 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/expense')]
 class ExpenseController extends AbstractController
 {
-    #[Route('/', name: 'expense_index', methods: ['GET'])]
-    public function index(ExpenseRepository $expenseRepository): Response
+    private TricountRepository $tricountRepository;
+
+    public function __construct(TricountRepository $tricountRepository)
     {
+        $this->tricountRepository = $tricountRepository;
+    }
+
+    #[Route('/{param}', name: 'expense_index', methods: ['GET'])]
+    public function index(int $param, ExpenseRepository $expenseRepository, LoggerInterface $logger): Response
+    {
+        $expenses = $this->tricountRepository->find($param)->getExpenses();
         return $this->render('expense/index.html.twig', [
-            'expenses' => $expenseRepository->findAll(),
+            'expenses' => $expenses,
+            'param' => $param,
         ]);
     }
 
-    #[Route('/new', name: 'expense_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/new/{param}', name: 'expense_new', methods: ['GET', 'POST'])]
+    public function new(int $param, Request $request, EntityManagerInterface $entityManager): Response
     {
         $expense = new Expense();
         $form = $this->createForm(ExpenseType::class, $expense);
@@ -33,12 +44,13 @@ class ExpenseController extends AbstractController
             $entityManager->persist($expense);
             $entityManager->flush();
 
-            return $this->redirectToRoute('expense_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('expense_index', ['param' => $param], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('expense/new.html.twig', [
             'expense' => $expense,
             'form' => $form,
+            'param' => $param,
         ]);
     }
 
