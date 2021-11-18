@@ -36,7 +36,9 @@ class ExpenseController extends AbstractController
     #[Route('/new/{param}', name: 'expense_new', methods: ['GET', 'POST'])]
     public function new(int $param, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $tricount = $this->tricountRepository->find($param);
         $expense = new Expense();
+        $expense->setTricount($tricount);
         $form = $this->createForm(ExpenseType::class, $expense);
         $form->handleRequest($request);
 

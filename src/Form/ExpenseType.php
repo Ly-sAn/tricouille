@@ -14,16 +14,19 @@ class ExpenseType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $users = $options['data']->getTricount()->getUsers();
         $builder
             ->add('Title')
             ->add('CreatedAt')
             ->add('Amount')
             ->add('Payer', EntityType::class, [
                 'class' => User::class,
+                'choices' => $users,
                 'choice_label' => 'name',
             ])
             ->add('Participant', EntityType::class, [
                 'class' => User::class,
+                'choices' => $users,
                 'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => true
