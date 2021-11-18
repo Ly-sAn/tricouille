@@ -25,6 +25,7 @@
                 <td>
                     <a href="{{ path('tricount_show', {'id': tricount.id}) }}">show</a>
                     <a href="{{ path('tricount_edit', {'id': tricount.id}) }}">edit</a>
+                    <a href="{{ path('expense_index', {'param': tricount.id}) }}">show expenses</a>
                 </td>
             </tr>
         {% else %}
