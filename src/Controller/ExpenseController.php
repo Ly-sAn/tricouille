@@ -56,11 +56,12 @@ class ExpenseController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'expense_show', methods: ['GET'])]
-    public function show(Expense $expense): Response
+    #[Route('/show/{id}/{param}', name: 'expense_show', methods: ['GET'])]
+    public function show(Expense $expense, int $param): Response
     {
         return $this->render('expense/show.html.twig', [
             'expense' => $expense,
+            'param' => $param
         ]);
     }
 
