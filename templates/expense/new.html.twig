@@ -3,9 +3,27 @@
 {% block title %}New Expense{% endblock %}
 
 {% block body %}
-    <h1>Create new Expense</h1>
 
-    {{ include('expense/_form.html.twig') }}
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create new Expense</h5>
+                <a href="{{ path('expense_index') }}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
+            </div>
+            <div class="modal-body">
+                {{ include('expense/_form.html.twig') }}
+            </div>
+        </div>
+        <a href="{{ path('expense_index', {'param': param}) }}">back to list</a>
+    </div>
 
-    <a href="{{ path('expense_index', {'param': param}) }}">back to list</a>
+    <style>
+        body{
+            background: linear-gradient(to right bottom, #32c8dd, #00b7e7, #00a2f1, #008bf4, #126feb);
+            background-repeat: no-repeat;
+            padding-top: 12%;
+            padding-bottom: 22%;
+        }
+    </style>
+
 {% endblock %}

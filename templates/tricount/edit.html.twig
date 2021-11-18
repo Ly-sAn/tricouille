@@ -3,11 +3,26 @@
 {% block title %}Edit Tricount{% endblock %}
 
 {% block body %}
-    <h1>Edit Tricount</h1>
 
-    {{ include('tricount/_form.html.twig', {'button_label': 'Update'}) }}
+        <h1 class="text-center mt-5">Edit Tricount</h1>
 
-    <a href="{{ path('tricount_index') }}">back to list</a>
-
-    {{ include('tricount/_delete_form.html.twig') }}
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                {{ include('tricount/_form.html.twig', {'button_label': 'Update'}) }}
+                {{ include('tricount/_delete_form.html.twig') }}
+                <button class="btn btn-primary "><a class="text-white text-decoration-none" href="{{ path('tricount_index') }}">Back to list</a></button>            </div>
+        </div>
+    </div>
+    <style>
+        h1{
+            color: white;
+        }
+        body{
+            background: linear-gradient(to right bottom, #32c8dd, #00b7e7, #00a2f1, #008bf4, #126feb);
+            background-repeat: no-repeat;
+            padding-top: 12%;
+            padding-bottom: 25%;
+        }
+    </style>
 {% endblock %}

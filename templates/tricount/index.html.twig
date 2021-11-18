@@ -3,29 +3,32 @@
 {% block title %}Tricount index{% endblock %}
 
 {% block body %}
-    <h1>Tricount index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Currency</th>
-                <th>Description</th>
-                <th>actions</th>
+    <h1 class="text-center mt-5">Tricount index</h1>
+
+<div class="modal-dialog">
+    <div class="modal-content">
+
+    <table class="table mt-3">
+
+            <tr class="list-group list-group-horizontal p-4">
+                <th class="list-group-item w-25">Id</th>
+                <th class="list-group-item w-25">Title</th>
+                <th class="list-group-item w-25">Currency</th>
+                <th class="list-group-item w-25">Description</th>
+                <th class="list-group-item w-25">Actions</th>
             </tr>
-        </thead>
-        <tbody>
+
         {% for tricount in tricounts %}
-            <tr>
-                <td>{{ tricount.id }}</td>
-                <td>{{ tricount.Title }}</td>
-                <td>{{ tricount.Currency }}</td>
-                <td>{{ tricount.Description }}</td>
-                <td>
-                    <a href="{{ path('tricount_show', {'id': tricount.id}) }}">show</a>
-                    <a href="{{ path('tricount_edit', {'id': tricount.id}) }}">edit</a>
-                    <a href="{{ path('expense_index', {'param': tricount.id}) }}">show expenses</a>
+            <tr class="list-group list-group-horizontal px-4">
+                <td class="list-group-item w-25">{{ tricount.id }}</td>
+                <td class="list-group-item w-25">{{ tricount.title }}</td>
+                <td class="list-group-item w-25">{{ tricount.Currency }}</td>
+                <td class="list-group-item w-25">{{ tricount.Description }}</td>
+                <td class="list-group-item w-25">
+                    <button class="btn btn-primary"><a class="text-white text-decoration-none" href="{{ path('tricount_show', {'id': tricount.id}) }}">show</a></button>
+                    <button class="btn btn-warning"><a class="text-white text-decoration-none" href="{{ path('tricount_edit', {'id': tricount.id}) }}">edit</a></button>
+                    <button class="btn btn-warning"><a class="text-white text-decoration-none" href="{{ path('expense_index', {'param': tricount.id}) }}">edit</a></button>
                 </td>
             </tr>
         {% else %}

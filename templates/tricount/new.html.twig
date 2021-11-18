@@ -3,9 +3,25 @@
 {% block title %}New Tricount{% endblock %}
 
 {% block body %}
-    <h1>Create new Tricount</h1>
+        <h1 class="text-center mt-5">Create new Tricount</h1>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                {{ include('tricount/_form.html.twig') }}
+                <a href="{{ path('tricount_index') }}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
 
-    {{ include('tricount/_form.html.twig') }}
-
-    <a href="{{ path('tricount_index') }}">back to list</a>
+            </div>
+        </div>
+    </div>
+    <style>
+        h1{
+            color: white;
+        }
+        body{
+            background: linear-gradient(to right bottom, #32c8dd, #00b7e7, #00a2f1, #008bf4, #126feb);
+            background-repeat: no-repeat;
+            padding-top: 12%;
+            padding-bottom: 25%;
+        }
+    </style>
 {% endblock %}
