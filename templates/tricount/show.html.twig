@@ -35,7 +35,7 @@
 
             <div class="test" >
 
-                    <div class="p-3 px-5"><button class="btn btn-primary "><a class="text-white text-decoration-none" href="{{ path('tricount_index') }}">Back to list</a></button></div>
+                <div class="p-3 px-5"><button class="btn btn-primary "><a class="text-white text-decoration-none" href="{{ path('tricount_index') }}">Back to list</a></button></div>
 
                 <div class="p-3 px-5"><button class="btn btn-warning "><a class="text-white text-decoration-none" href="{{ path('tricount_edit', {'id': tricount.id}) }}">Edit</a></button></div>
 
@@ -48,6 +48,15 @@
     </div>
 
     <style>
+        h1{
+            color: white;
+        }
+        body{
+            background: linear-gradient(to right bottom, #32c8dd, #00b7e7, #00a2f1, #008bf4, #126feb);
+            background-repeat: no-repeat;
+            padding-top: 6%;
+            padding-bottom: 25%;
+        }
         .modal-dialog{
             margin-left: 24%;
         }

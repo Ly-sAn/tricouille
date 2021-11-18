@@ -3,9 +3,24 @@
 {% block title %}New User{% endblock %}
 
 {% block body %}
-    <h1>Create new User</h1>
 
-    {{ include('user/_form.html.twig') }}
-
-    <a href="{{ path('user_index') }}">back to list</a>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create new User</h5>
+                <a href="{{ path('user_index') }}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
+            </div>
+            <div class="modal-body">
+                {{ include('user/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+    <style>
+        body{
+            background: linear-gradient(to right bottom, #32c8dd, #00b7e7, #00a2f1, #008bf4, #126feb);
+            background-repeat: no-repeat;
+            padding-top: 13%;
+            padding-bottom: 26%;
+        }
+    </style>
 {% endblock %}
