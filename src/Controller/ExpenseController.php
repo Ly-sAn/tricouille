@@ -74,7 +74,7 @@ class ExpenseController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('expense_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('expense_index', ['param'=> $param], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('expense/edit.html.twig', [

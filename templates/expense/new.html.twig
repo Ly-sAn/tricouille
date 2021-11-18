@@ -8,13 +8,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Create new Expense</h5>
-                <a href="{{ path('expense_index') }}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
             </div>
             <div class="modal-body">
                 {{ include('expense/_form.html.twig') }}
+                <a href="{{ path('expense_index', {'param': param}) }}">back to list</a>
             </div>
         </div>
-        <a href="{{ path('expense_index', {'param': param}) }}">back to list</a>
     </div>
 
     <style>
