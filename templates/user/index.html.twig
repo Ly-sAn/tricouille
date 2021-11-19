@@ -1,35 +1,61 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+{% endblock  %}
+
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.Name }}</td>
-                <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <h1 class="text-center mt-5">User index</h1>
 
-    <a href="{{ path('tricount_index') }}">back to tricount list</a>
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <table class="table mt-3">
+
+                <tr class="list-group list-group-horizontal p-4">
+                    <th class="list-group-item w-25">Id</th>
+                    <th class="list-group-item w-25">Name</th>
+                    <th class="list-group-item w-25">actions</th>
+                </tr>
+                {% for user in users %}
+                <tr class="list-group list-group-horizontal px-4">
+                    <td class="list-group-item w-25">{{ user.id }}</td>
+                    <td class="list-group-item w-25">{{ user.Name }}</td>
+                    <td class="list-group-item w-25">
+                        <a class="text-white text-decoration-none" href="{{ path('user_show', {'id': user.id}) }}"><button class="btn btn-primary">show</button></a>
+                        <a class="text-white text-decoration-none" href="{{ path('user_edit', {'id': user.id}) }}"><button class="btn btn-warning">edit</button></a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            <a href="{{ path('tricount_index') }}">back to tricount list</a>
+        </div>
+    </div>
+
+    <style>
+        h1{
+            color: white;
+        }
+        body{
+            background: linear-gradient(to right bottom, #32c8dd, #00b7e7, #00a2f1, #008bf4, #126feb);
+            background-repeat: no-repeat;
+            padding-top: 5%;
+            padding-bottom: 25%;
+        }
+        .modal-dialog{
+            margin-left: 25%;
+        }
+        .modal-content{
+            width: 140%;
+            padding-left: 10%;
+        }
+    </style>
 {% endblock %}

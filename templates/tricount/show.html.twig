@@ -10,41 +10,36 @@
 
     <h1 class="text-center mt-5">Tricount</h1>
 
-<div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <table class="table mt-5">
 
-    <table class="table mt-5">
+                <tr class="list-group list-group-horizontal px-4 p-2">
+                    <th class="list-group-item w-50">Id</th>
+                    <td class="list-group-item w-50">{{ tricount.id }}</td>
+                </tr>
+                <tr class="list-group list-group-horizontal px-4 p-2">
+                    <th class="list-group-item w-50">Title</th>
+                    <td class="list-group-item w-50">{{ tricount.Title }}</td>
+                </tr>
+                <tr class="list-group list-group-horizontal px-4 p-2">
+                    <th class="list-group-item w-50">Currency</th>
+                    <td class="list-group-item w-50">{{ tricount.Currency }}</td>
+                </tr>
+                <tr class="list-group list-group-horizontal px-4 p-2">
+                    <th class="list-group-item w-50">Description</th>
+                    <td class="list-group-item w-50">{{ tricount.Description }}</td>
+                </tr>
+            </table>
 
-            <tr class="list-group list-group-horizontal px-4 p-2">
-                <th class="list-group-item w-50">Id</th>
-                <td class="list-group-item w-50">{{ tricount.id }}</td>
-            </tr>
-            <tr class="list-group list-group-horizontal px-4 p-2">
-                <th class="list-group-item w-50">Title</th>
-                <td class="list-group-item w-50">{{ tricount.Title }}</td>
-            </tr>
-            <tr class="list-group list-group-horizontal px-4 p-2">
-                <th class="list-group-item w-50">Currency</th>
-                <td class="list-group-item w-50">{{ tricount.Currency }}</td>
-            </tr>
-            <tr class="list-group list-group-horizontal px-4 p-2">
-                <th class="list-group-item w-50">Description</th>
-                <td class="list-group-item w-50">{{ tricount.Description }}</td>
-            </tr>
-    </table>
+            <div class="group_btn">
+                <div class="p-3 px-5"><a class="text-white text-decoration-none" href="{{ path('tricount_index') }}"><button class="btn btn-primary ">Back to list</button></a></div>
 
-            <div class="test" >
+                <div class="p-3 px-5"><a class="text-white text-decoration-none" href="{{ path('tricount_edit', {'id': tricount.id}) }}"><button class="btn btn-warning ">Edit</button></a></div>
 
-                <div class="p-3 px-5"><button class="btn btn-primary "><a class="text-white text-decoration-none" href="{{ path('tricount_index') }}">Back to list</a></button></div>
-
-                <div class="p-3 px-5"><button class="btn btn-warning "><a class="text-white text-decoration-none" href="{{ path('tricount_edit', {'id': tricount.id}) }}">Edit</a></button></div>
-
-                <div class="p-3 px-5" >{{ include('tricount/_delete_form.html.twig') }}</div>
-
+                <div class="p-3 px-5">{{ include('tricount/_delete_form.html.twig') }}</div>
             </div>
-
-    </div>
-
+        </div>
     </div>
 
     <style>
@@ -63,7 +58,7 @@
         .modal-content{
             width: 150%;
         }
-        .test{
+        .group_btn{
             display: flex;
             padding-left: 12%;
             padding-bottom: 3%;

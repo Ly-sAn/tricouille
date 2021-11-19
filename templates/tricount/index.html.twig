@@ -1,43 +1,66 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+{% endblock  %}
+
 {% block title %}Tricount index{% endblock %}
 
 {% block body %}
 
     <h1 class="text-center mt-5">Tricount index</h1>
 
-<div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-dialog">
+        <div class="modal-content">
 
-    <table class="table mt-3">
+            <table class="table mt-3">
 
-            <tr class="list-group list-group-horizontal p-4">
-                <th class="list-group-item w-25">Id</th>
-                <th class="list-group-item w-25">Title</th>
-                <th class="list-group-item w-25">Currency</th>
-                <th class="list-group-item w-25">Description</th>
-                <th class="list-group-item w-25">Actions</th>
-            </tr>
+                <tr class="list-group list-group-horizontal p-4">
+                    <th class="list-group-item w-25">Id</th>
+                    <th class="list-group-item w-25">Title</th>
+                    <th class="list-group-item w-25">Currency</th>
+                    <th class="list-group-item w-25">Description</th>
+                    <th class="list-group-item w-25">Actions</th>
+                </tr>
 
-        {% for tricount in tricounts %}
-            <tr class="list-group list-group-horizontal px-4">
-                <td class="list-group-item w-25">{{ tricount.id }}</td>
-                <td class="list-group-item w-25">{{ tricount.title }}</td>
-                <td class="list-group-item w-25">{{ tricount.Currency }}</td>
-                <td class="list-group-item w-25">{{ tricount.Description }}</td>
-                <td class="list-group-item w-25">
-                    <button class="btn btn-primary"><a class="text-white text-decoration-none" href="{{ path('tricount_show', {'id': tricount.id}) }}">show</a></button>
-                    <button class="btn btn-warning"><a class="text-white text-decoration-none" href="{{ path('tricount_edit', {'id': tricount.id}) }}">edit</a></button>
-                    <button class="btn btn-warning"><a class="text-white text-decoration-none" href="{{ path('expense_index', {'param': tricount.id}) }}">edit</a></button>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                {% for tricount in tricounts %}
+                <tr class="list-group list-group-horizontal px-4">
+                    <td class="list-group-item w-25">{{ tricount.id }}</td>
+                    <td class="list-group-item w-25">{{ tricount.title }}</td>
+                    <td class="list-group-item w-25">{{ tricount.Currency }}</td>
+                    <td class="list-group-item w-25">{{ tricount.Description }}</td>
+                    <td class="list-group-item w-25">
+                        <a class="text-white text-decoration-none" href="{{ path('tricount_show', {'id': tricount.id}) }}"><button class="btn btn-primary">show</button></a>
+                        <a class="text-white text-decoration-none" href="{{ path('tricount_edit', {'id': tricount.id}) }}"><button class="btn btn-warning">edit</button></a>
+                        <a class="text-white text-decoration-none" href="{{ path('expense_index', {'param': tricount.id}) }}"><button class="btn btn-warning">expense</button></a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+                {% endfor %}
+            </table>
 
-    <a href="{{ path('tricount_new') }}">Create new</a>
+            <a href="{{ path('tricount_new') }}">Create new</a>
+        </div>
+    </div>
+
+    <style>
+        h1{
+            color: white;
+        }
+        body{
+            background: linear-gradient(to right bottom, #32c8dd, #00b7e7, #00a2f1, #008bf4, #126feb);
+            background-repeat: no-repeat;
+            padding-top: 5%;
+            padding-bottom: 25%;
+        }
+        .modal-dialog{
+            margin-left: 19%;
+        }
+        .modal-content{
+            width: 180%;
+        }
+    </style>
 {% endblock %}
