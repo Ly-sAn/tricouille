@@ -12,6 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 #[Route('/expense')]
 class ExpenseController extends AbstractController
@@ -21,6 +23,7 @@ class ExpenseController extends AbstractController
     public function __construct(TricountRepository $tricountRepository)
     {
         $this->tricountRepository = $tricountRepository;
+
     }
 
     #[Route('/{param}', name: 'expense_index', methods: ['GET'])]
@@ -95,3 +98,8 @@ class ExpenseController extends AbstractController
         return $this->redirectToRoute('expense_index', [], Response::HTTP_SEE_OTHER);
     }
 }
+
+
+
+
+
