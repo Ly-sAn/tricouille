@@ -27,9 +27,16 @@ class ExpenseController extends AbstractController
     public function index(int $param, ExpenseRepository $expenseRepository, LoggerInterface $logger): Response
     {
         $expenses = $this->tricountRepository->find($param)->getExpenses();
+        foreach ($expenses as $expense)
+        {
+            $payor = $expense->getPayer();
+            $payor_name = $payor->getName();
+        }
+
         return $this->render('expense/index.html.twig', [
             'expenses' => $expenses,
             'param' => $param,
+            'payer' => $payor_name,
         ]);
     }
 
@@ -37,6 +44,7 @@ class ExpenseController extends AbstractController
     public function new(int $param, Request $request, EntityManagerInterface $entityManager): Response
     {
         $tricount = $this->tricountRepository->find($param);
+
         $expense = new Expense();
         $expense->setTricount($tricount);
         $form = $this->createForm(ExpenseType::class, $expense);
