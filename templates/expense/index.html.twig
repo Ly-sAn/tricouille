@@ -16,6 +16,7 @@
             <tr class="list-group list-group-horizontal p-4">
                 <th class="list-group-item w-25">Id</th>
                 <th class="list-group-item w-25">Title</th>
+                <th class="list-group-item w-25">Payor</th>
                 <th class="list-group-item w-25">CreatedAt</th>
                 <th class="list-group-item w-25">Amount</th>
                 <th class="list-group-item w-25">actions</th>
@@ -24,6 +25,7 @@
                 <tr class="list-group list-group-horizontal px-4">
                     <td class="list-group-item w-25">{{ expense.id }}</td>
                     <td class="list-group-item w-25">{{ expense.Title }}</td>
+                    <td class="list-group-item w-25">{{ payor_names[loop.index-1] }}</td>
                     <td class="list-group-item w-25">{{ expense.CreatedAt ? expense.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
                     <td class="list-group-item w-25">{{ expense.Amount }}</td>
                     <td class="list-group-item w-25">
@@ -39,6 +41,8 @@
         </table>
 
         <a href="{{ path('expense_new', {'param': param}) }}">Create new</a>
+        <a href="{{ path('tricount_index') }}">Go to tricounts</a>
+        <a href="{{ path('balance', {'id' :  param}) }}">Go to balance</a>
     </div>
 </div>
 
