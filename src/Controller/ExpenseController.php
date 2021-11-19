@@ -6,12 +6,14 @@ use App\Entity\Expense;
 use App\Form\ExpenseType;
 use App\Repository\ExpenseRepository;
 use App\Repository\TricountRepository;
+use App\Service\MailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 #[Route('/expense')]
 class ExpenseController extends AbstractController
@@ -21,6 +23,7 @@ class ExpenseController extends AbstractController
     public function __construct(TricountRepository $tricountRepository)
     {
         $this->tricountRepository = $tricountRepository;
+
     }
 
     #[Route('/{param}', name: 'expense_index', methods: ['GET'])]
@@ -34,8 +37,9 @@ class ExpenseController extends AbstractController
     }
 
     #[Route('/new/{param}', name: 'expense_new', methods: ['GET', 'POST'])]
-    public function new(int $param, Request $request, EntityManagerInterface $entityManager): Response
+    public function new(int $param, Request $request, EntityManagerInterface $entityManager, MailService $mailService): Response
     {
+
         $tricount = $this->tricountRepository->find($param);
         $expense = new Expense();
         $expense->setTricount($tricount);
@@ -45,6 +49,7 @@ class ExpenseController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($expense);
             $entityManager->flush();
+            $mailService->sendNotification();
 
             return $this->redirectToRoute('expense_index', ['param' => $param], Response::HTTP_SEE_OTHER);
         }
@@ -95,3 +100,9 @@ class ExpenseController extends AbstractController
         return $this->redirectToRoute('expense_index', [], Response::HTTP_SEE_OTHER);
     }
 }
+
+
+
+
+
+
