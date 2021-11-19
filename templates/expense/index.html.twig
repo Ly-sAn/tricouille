@@ -18,6 +18,8 @@
             <tr>
                 <th>Id</th>
                 <th>Title</th>
+                <th>Payor</th>
+                <th>Participants</th>
                 <th>CreatedAt</th>
                 <th>Amount</th>
                 <th>actions</th>
@@ -28,6 +30,8 @@
             <tr>
                 <td>{{ expense.id }}</td>
                 <td>{{ expense.Title }}</td>
+                <td>{{ payor_names[loop.index-1] }}</td>
+                <td>participant</td>
                 <td>{{ expense.CreatedAt ? expense.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ expense.Amount }}</td>
                 <td>
