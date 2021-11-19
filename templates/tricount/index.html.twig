@@ -8,7 +8,7 @@
 
 {% block body %}
 
-    <h1 class="text-center mt-5">Tricount index</h1>
+    <h1 class="text-center mt-5">Tricouille index</h1>
 
     <div class="modal-dialog">
         <div class="modal-content">
@@ -32,7 +32,7 @@
                     <td class="list-group-item w-25">
                         <a class="text-white text-decoration-none" href="{{ path('tricount_show', {'id': tricount.id}) }}"><button class="btn btn-primary">show</button></a>
                         <a class="text-white text-decoration-none" href="{{ path('tricount_edit', {'id': tricount.id}) }}"><button class="btn btn-warning">edit</button></a>
-                        <a class="text-white text-decoration-none" href="{{ path('expense_index', {'param': tricount.id}) }}"><button class="btn btn-warning">expense</button></a>
+                        <a class="text-white text-decoration-none" href="{{ path('expense_index', {'param': tricount.id}) }}"><button class="btn btn-info">expense</button></a>
                     </td>
                 </tr>
                 {% else %}
