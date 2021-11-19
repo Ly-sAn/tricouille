@@ -19,11 +19,11 @@ class BalanceController extends AbstractController
     #[Route('/balance/{id}', name: 'balance')]
     public function index(int $id): Response
     {
-        $amount = $this->balanceService->CalculateBalance($id);
+        $balance = $this->balanceService->CalculateBalance($id);
 
         return $this->render('balance/index.html.twig', [
             'controller_name' => 'BalanceController',
-            'amount' => $amount,
+            'balance' => $balance,
         ]);
 
     }

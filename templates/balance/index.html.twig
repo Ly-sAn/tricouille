@@ -9,12 +9,18 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-    <div>Amount : {{ amount }}</div>
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/lucas/Code/Symfony/tricouille/src/Controller/BalanceController.php'|file_link(0) }}">src/Controller/BalanceController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/lucas/Code/Symfony/tricouille/templates/balance/index.html.twig'|file_link(0) }}">templates/balance/index.html.twig</a></code></li>
-    </ul>
+    <h1>Balance</h1>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Amount</th>
+            </tr>
+            {% for b in balance %}
+            <tr>
+                <td>{{ b.name }}</td>
+                <td>{{ b.balance }}</td>
+            </tr>
+            {% endfor %}
+        </table>
 </div>
 {% endblock %}
